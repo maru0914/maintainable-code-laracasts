@@ -3,39 +3,37 @@
 namespace App\Services\PaymentOptions;
 
 use App\Contracts\PaymentOption;
-use App\Models\PaymentPayoneer;
-use App\Repositories\PayoneerRepository;
+use App\Repositories\WiseRepository;
 use Exception;
 use Throwable;
 
-class Payoneer implements PaymentOption
+class Wise implements PaymentOption
 {
-    public function __construct(protected PayoneerRepository $payoneerRepository)
+    public function __construct(protected WiseRepository $wiseRepository)
     {
-        $this->payoneerRepository = $payoneerRepository;
     }
 
     public function getFields(): array
     {
-        return $this->payoneerRepository->getFields();
+        return $this->wiseRepository->getFields();
     }
     public function getValues(int $userId)
     {
 
     }
-    public function store(int $userId, array $data): PaymentPayoneer
+    public function store(int $userId, array $data)
     {
         try {
             $fields = $this->getFields();
-            $payoneerDetails = [];
+            $wiseDetails = [];
             foreach ($fields as $field) {
                 if(isset($data[$field->name])) {
-                    $payoneerDetails[$field->name] = $data[$field->name];
+                    $wiseDetails[$field->name] = $data[$field->name];
                 } else {
                     throw new Exception("Missing field: {$field->name}");
                 }
             }
-            return $this->payoneerRepository->store($userId, $payoneerDetails);
+            return $this->wiseRepository->store($userId, $wiseDetails);
         } catch (Throwable $th) {
             throw $th;
         }
