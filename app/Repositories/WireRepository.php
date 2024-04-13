@@ -2,11 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Contracts\WireRepositoryInterface;
 use App\Models\PaymentWire;
 
-class WireRepository
+class WireRepository implements WireRepositoryInterface
 {
-    public function getFields()
+    public function getFields(): array
     {
         return [
             (object)[
@@ -130,7 +131,7 @@ class WireRepository
         //
     }
 
-    public function store(int $userId, array $data)
+    public function store(int $userId, array $data): PaymentWire
     {
         return PaymentWire::updateOrCreate(
             ['user_id' => $userId],

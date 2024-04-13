@@ -12,7 +12,7 @@ class PaymentController extends Controller
     public function show(Request $request)
     {
         $type = 'payoneer';
-        $payoneer = new Payoneer;
+        $payoneer = app()->make(Payoneer::class);
         $fields = $payoneer->getFields();
         $data = $payoneer->getValues(auth()->id());
         return view('payment_details', compact('fields', 'data', 'type'));
@@ -23,9 +23,9 @@ class PaymentController extends Controller
     {
         try {
             if ($request->payment_type == 'wire') {
-                $payment = new Wire();
+                $payment = app()->make(Wire::class);
             } else {
-                $payment = new Payoneer();
+                $payment = app()->make(Payoneer::class);
             }
             $payment->store(auth()->id(), $request->all());
             return redirect()->route('payment.show', $request->payment_type)->with('success', 'Payment details saved successfully.');

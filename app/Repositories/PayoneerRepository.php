@@ -2,11 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Contracts\PayoneerRepositoryInterface;
 use App\Models\PaymentPayoneer;
 
-class PayoneerRepository
+class PayoneerRepository implements PayoneerRepositoryInterface
 {
-    public function getFields()
+    public function getFields(): array
     {
         return [
           (object)[
@@ -23,7 +24,7 @@ class PayoneerRepository
         //
     }
 
-    public function store(int $userId, array $data)
+    public function store(int $userId, array $data): PaymentPayoneer
     {
         return PaymentPayoneer::updateOrCreate(
             ['user_id' => $userId],

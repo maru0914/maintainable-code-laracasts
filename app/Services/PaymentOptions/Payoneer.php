@@ -3,6 +3,7 @@
 namespace App\Services\PaymentOptions;
 
 use App\Contracts\PaymentOption;
+use App\Models\PaymentPayoneer;
 use App\Repositories\PayoneerRepository;
 use Exception;
 use Throwable;
@@ -22,7 +23,7 @@ class Payoneer implements PaymentOption
     {
 
     }
-    public function store(int $userId, array $data)
+    public function store(int $userId, array $data): PaymentPayoneer
     {
         try {
             $fields = $this->getFields();
