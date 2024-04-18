@@ -32,6 +32,13 @@ class WireRepository implements WireRepositoryInterface
                 'style' => 'col-xl-6',
             ],
             (object)[
+                'name' => 'full_address',
+                'type' => 'text',
+                'label' => 'Type your address 1',
+                'required' => true,
+                'style' => 'col-xl-12',
+            ],
+            (object)[
                 'name' => 'account_address',
                 'type' => 'text',
                 'label' => 'Address 1',

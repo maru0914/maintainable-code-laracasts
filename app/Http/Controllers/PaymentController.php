@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Contracts\PaymentOption;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentStoreRequest;
-use App\Services\PaymentOptions\Payoneer;
-use App\Services\PaymentOptions\Wire;
 
 class PaymentController extends Controller
 {
